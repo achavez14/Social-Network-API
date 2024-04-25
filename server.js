@@ -1,29 +1,20 @@
 const express = require('express');
-const connectDB = require('./config/connection');
+const db = require('./config/connection');
+const routes = require('./routes');
+
+const PORT = 3001;
 const app = express();
 
-// Connect to MongoDB
-connectDB();
-
-// Middleware
+// Middleware to parse URL-encoded and JSON data
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Define Routes
-app.use('/api/users', require('./routes/userRoutes'));
-app.use('/api/posts', require('./routes/postRoutes'));
+// Include routes
+app.use(routes);
 
-// Error Handling Middleware
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send('Something went wrong!');
-});
-
-// Default Route
-app.get('*', (req, res) => {
-  res.status(404).send('Page not found');
-});
-
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+// Start the server after the database connection is open
+db.once('open', () => {
+  app.listen(PORT, () => {
+    console.log(`API server running on port ${PORT}!`);
+  });
 });
