@@ -87,18 +87,11 @@ This project is licensed under the MIT License.
 ### Libraries and Frameworks
 
 ### Front End:
-- Handlebars.js
+- React
 
 ### Back End:
 - Express.js
-- Sequelize
-- pg
-- dotenv
-- node.js
-- express-session
 
 ### Database:
-- PostgreSQL
-
-### Security:
-- bcrypt
+- MongoDB
+- Mongoose ODM
