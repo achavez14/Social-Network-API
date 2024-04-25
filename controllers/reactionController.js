@@ -1,4 +1,4 @@
-const Reaction = require('../models/Reaction');
+const Reaction = require('../models/reaction');
 
 const reactionController = {
   async getReactions(req, res) {
